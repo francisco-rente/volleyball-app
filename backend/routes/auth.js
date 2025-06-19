@@ -36,7 +36,9 @@ router.post('/register', [
 
     const payload = {
       user: {
-        id: user.id
+        id: user.id,
+        username: user.username,
+        role: user.role
       }
     };
 
@@ -67,13 +69,16 @@ router.post('/login', [
   }
 
   const { username , password } = req.body;
+  console.log(username, password);
   try {
     let user = await User.findOne({ username });
+    console.log(user);
     if (!user) {
       return res.status(400).json({ msg: 'Invalid credentials' });
     }
 
     const isMatch = await user.comparePassword(password);
+    console.log(isMatch);
     if (!isMatch) {
       return res.status(400).json({ msg: 'Invalid credentials' });
     }
@@ -81,7 +86,9 @@ router.post('/login', [
 
     const payload = {
       user: {
-        id: user.id
+        id: user.id,
+        username: user.username,
+        role: user.role
       }
     };
 

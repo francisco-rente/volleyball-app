@@ -26,9 +26,9 @@ export const AuthProvider = ({ children }) => {
           setUser(null);
         } else {
           setUser({
-            id: decodedToken.id,
-            username: decodedToken.username,
-            role: decodedToken.role
+            id: decodedToken.user.id,
+            username: decodedToken.user.username,
+            role: decodedToken.user.role
           });
         }
       }
@@ -41,6 +41,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (username, password) => {
+    console.log(username, password);
     const response = await axios.post('http://localhost:5000/api/auth/login', {
       username,
       password
@@ -51,9 +52,9 @@ export const AuthProvider = ({ children }) => {
     // Decode token and set user
     const decodedToken = jwtDecode(token);
     setUser({
-      id: decodedToken.id,
-      username: decodedToken.username,
-      role: decodedToken.role
+      id: decodedToken.user.id,
+      username: decodedToken.user.username,
+      role: decodedToken.user.role
     });
   };
 
@@ -69,9 +70,9 @@ export const AuthProvider = ({ children }) => {
     // Decode token and set user
     const decodedToken = jwtDecode(token);
     setUser({
-      id: decodedToken.id,
-      username: decodedToken.username,
-      role: decodedToken.role
+      id: decodedToken.user.id,
+      username: decodedToken.user.username,
+      role: decodedToken.user.role
     });
   };
 

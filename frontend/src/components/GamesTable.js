@@ -24,7 +24,8 @@ import {
   TablePagination,
   Accordion,
   AccordionSummary,
-  AccordionDetails
+  AccordionDetails,
+  Button
 } from '@mui/material';
 import { format } from 'date-fns';
 import {
@@ -35,6 +36,7 @@ import {
   KeyboardArrowDown as KeyboardArrowDownIcon,
   KeyboardArrowUp as KeyboardArrowUpIcon
 } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 const GamesTable = () => {
   const [games, setGames] = useState([]);
@@ -212,6 +214,15 @@ const GamesTable = () => {
               >
                 {expandedGame === game._id ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </IconButton>
+              <Button
+                component={Link}
+                to={`/game/${game._id}`}
+                size="small"
+                variant="outlined"
+                sx={{ ml: 'auto' }}
+              >
+                View Details
+              </Button>
             </CardActions>
           </Card>
         </Grid>
@@ -347,6 +358,7 @@ const GamesTable = () => {
               <TableCell>Score</TableCell>
               <TableCell>Status</TableCell>
               <TableCell>Referee</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -387,9 +399,19 @@ const GamesTable = () => {
                     />
                   </TableCell>
                   <TableCell>{game.referee?.username}</TableCell>
+                  <TableCell>
+                    <Button
+                      component={Link}
+                      to={`/game/${game._id}`}
+                      size="small"
+                      variant="outlined"
+                    >
+                      View Details
+                    </Button>
+                  </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={9}>
+                  <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={11}>
                     <Collapse in={expandedGame === game._id} timeout="auto" unmountOnExit>
                       <Box sx={{ margin: 2 }}>
                         <Typography variant="h6" gutterBottom component="div">
